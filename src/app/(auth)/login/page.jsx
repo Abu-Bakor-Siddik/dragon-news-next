@@ -14,7 +14,6 @@ const LoginPage = () => {
   const handleLoginFunc = (data) => {
     console.log(data);
   };
-  console.log(errors);
   return (
     <div className="container mx-auto min-h-[80vh] flex justify-center items-center bg-slate-100">
       <div className="p-4 rounded-xl bg-white">
