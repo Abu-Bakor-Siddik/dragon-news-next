@@ -4,12 +4,21 @@ import React from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const RightSidebar = () => {
+
   const handleGoogleSignin = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
     console.log(data);
   };
+  
+  const handleGithubSignin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "github",
+    });
+    console.log(data);
+  };
+
   return (
     <div>
       <h2 className="font-bold text-lg ">Login With</h2>
@@ -20,7 +29,7 @@ const RightSidebar = () => {
           {" "}
           <FaGoogle /> Login with Google
         </button>
-        <button className="btn">
+        <button className="btn" onClick={handleGithubSignin}>
           {" "}
           <FaGithub></FaGithub> Login with Github
         </button>
