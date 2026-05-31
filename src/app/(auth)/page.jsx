@@ -1,9 +1,8 @@
 "use client";
-import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const {
     register,
     handleSubmit,
@@ -11,7 +10,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleLoginFunc = (data) => {
+  const handleRegisterFunc = (data) => {
     console.log(data);
   };
   console.log(errors);
@@ -19,9 +18,9 @@ const LoginPage = () => {
     <div className="container mx-auto min-h-[80vh] flex justify-center items-center bg-slate-100">
       <div className="p-4 rounded-xl bg-white">
         <h2 className="font-bold text-xl text-center mb-6">
-          Login your account
+          Register your account
         </h2>
-        <form className="space-y-4" onSubmit={handleSubmit(handleLoginFunc)}>
+        <form className="space-y-4" onSubmit={handleSubmit(handleRegisterFunc)}>
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Email</legend>
             <input
@@ -49,17 +48,11 @@ const LoginPage = () => {
             )}
           </fieldset>
 
-          <button className="btn w-full bg-slate-800 text-white">Login</button>
+          <button className="btn w-full bg-slate-800 text-white">Register</button>
         </form>
-        <p>
-          Don&apos;t have an account?{" "}
-          <Link href={"/register"} className="text-red-600">
-            Register
-          </Link>{" "}
-        </p>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
