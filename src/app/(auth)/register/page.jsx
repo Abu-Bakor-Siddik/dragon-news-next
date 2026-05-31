@@ -1,7 +1,8 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterPage = () => {
   const {
@@ -10,12 +11,15 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegisterFunc = async(data) => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const handleRegisterFunc = async (data) => {
     console.log(data);
     const { email, name, photo, password } = data;
     console.log(name, email);
 
-    const {data:res,error} = await authClient.signUp.email({
+
+    const { data: res, error } = await authClient.signUp.email({
       name: name, // required
       email: email, // required
       password: password, // required
@@ -23,7 +27,13 @@ const RegisterPage = () => {
       callbackURL: "/",
     });
 
-    console .log(res,error);
+    console.log(res, error);
+    if (error) {
+      alert(error.message);
+    }
+    if (res) {
+      alert("Signup successful");
+    }
   };
   return (
     <div className="container mx-auto min-h-[80vh] flex justify-center items-center bg-slate-100">
@@ -70,16 +80,21 @@ const RegisterPage = () => {
               <span className="text-red-500">{errors.email.message}</span>
             )}
           </fieldset>
-          <fieldset className="fieldset">
+          <fieldset className="fieldset relative">
             <legend className="fieldset-legend">Password</legend>
             <input
               {...register("password", {
                 required: "password field is required",
               })}
-              type="password"
+              type={isShowPassword ? "text" : "password"}
               className="input"
               placeholder="Type here password"
             />
+            <span
+              className="absolute right-2 top-4 cursor-pointer"
+              onClick={() => setIsShowPassword(!isShowPassword)}>
+              {isShowPassword ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+            </span>
             {errors.password && (
               <span className="text-red-500">{errors.password.message}</span>
             )}
